@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Imagen provisional: trabajador con máscara facial y equipo de respiración autónoma en una planta petroquímica -->
+<svg viewBox="0 0 800 260" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cielo" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#C9D8E4"/><stop offset="1" stop-color="#EEF2F5"/></linearGradient>
+    <linearGradient id="botella" x1="0" x2="1"><stop offset="0" stop-color="#C9961F"/><stop offset="0.35" stop-color="#F2C744"/><stop offset="0.7" stop-color="#E0AE2C"/><stop offset="1" stop-color="#A97A12"/></linearGradient>
+    <linearGradient id="columna" x1="0" x2="1"><stop offset="0" stop-color="#8FA2B2"/><stop offset="0.4" stop-color="#C3CED7"/><stop offset="1" stop-color="#7E909F"/></linearGradient>
+  </defs>
+
+  <!-- Planta petroquímica de fondo -->
+  <rect width="800" height="260" fill="url(#cielo)"/>
+  <rect x="560" y="20" width="44" height="214" fill="url(#columna)"/>
+  <path d="M560 60 H604 M560 100 H604 M560 140 H604 M560 180 H604" stroke="#6F8293" stroke-width="3"/>
+  <rect x="626" y="64" width="32" height="170" fill="url(#columna)"/>
+  <rect x="680" y="100" width="130" height="134" fill="#A9B6C0"/>
+  <ellipse cx="745" cy="100" rx="65" ry="12" fill="#C3CED7"/>
+  <rect x="60" y="120" width="170" height="114" fill="#A9B6C0"/>
+  <ellipse cx="145" cy="120" rx="85" ry="14" fill="#C3CED7"/>
+  <path d="M0 176 H240 M0 194 H240 M604 160 H680 M658 190 H680" stroke="#6F8293" stroke-width="7"/>
+  <path d="M230 176 C250 176 250 150 270 150" fill="none" stroke="#6F8293" stroke-width="7"/>
+  <rect y="234" width="800" height="26" fill="#8A949C"/>
+
+  <!-- Jaula de la escalera (parte trasera) -->
+  <path d="M292 30 Q392 6 492 30 M292 110 Q392 86 492 110 M292 190 Q392 166 492 190" fill="none" stroke="#B7C1C9" stroke-width="7"/>
+
+  <!-- Botella y espaldera -->
+  <rect x="432" y="88" width="46" height="150" rx="23" fill="url(#botella)"/>
+  <rect x="432" y="206" width="46" height="12" fill="#2F6DB5"/>
+  <rect x="446" y="236" width="18" height="14" fill="#A9B6C0"/>
+  <rect x="420" y="92" width="18" height="146" rx="6" fill="#1E2328"/>
+
+  <!-- Cuerpo (buzo azul) -->
+  <path d="M348 112 Q390 92 436 108 L444 260 L340 260 Z" fill="#7FA9D9"/>
+  <path d="M410 104 Q426 106 436 108 L444 260 L414 260 Z" fill="#6B94C6"/>
+  <!-- Arnés -->
+  <path d="M428 104 C410 140 392 170 372 200" fill="none" stroke="#1E2328" stroke-width="10"/>
+  <rect x="338" y="214" width="108" height="12" fill="#1E2328"/>
+  <!-- Brazo -->
+  <path d="M370 124 C352 156 342 184 336 214" fill="none" stroke="#6B94C6" stroke-width="30" stroke-linecap="round"/>
+  <circle cx="334" cy="222" r="11" fill="#2A2F35"/>
+
+  <!-- Cabeza, casco y máscara -->
+  <circle cx="392" cy="72" r="27" fill="#D9AE94"/>
+  <path d="M404 64 l18 4 M404 84 l18 -2" stroke="#1E2328" stroke-width="5"/>
+  <path d="M358 60 A36 32 0 0 1 428 60 Z" fill="#D33A2C"/>
+  <rect x="348" y="56" width="86" height="9" rx="4" fill="#B52E22"/>
+  <ellipse cx="374" cy="84" rx="23" ry="28" fill="#1E2328"/>
+  <ellipse cx="371" cy="78" rx="15" ry="17" fill="#A9CBE0"/>
+  <path d="M362 70 q6 -6 14 -4" fill="none" stroke="#FFFFFF" stroke-width="3" opacity="0.8"/>
+  <circle cx="356" cy="102" r="13" fill="#D33A2C"/>
+  <circle cx="356" cy="102" r="7" fill="#2A2F35"/>
+  <!-- Latiguillo de la máscara a la botella -->
+  <path d="M356 115 C360 170 420 180 452 240" fill="none" stroke="#1E2328" stroke-width="6"/>
+
+  <!-- Jaula de la escalera (parte delantera) -->
+  <path d="M292 10 V234 M492 10 V234" stroke="#C9D1D8" stroke-width="9"/>
+  <path d="M292 150 Q392 176 492 150" fill="none" stroke="#C9D1D8" stroke-width="7"/>
+</svg>

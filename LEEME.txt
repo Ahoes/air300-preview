@@ -1,0 +1,56 @@
+WEB AIR300 S.L.
+
+Abrir esta carpeta en Visual Studio Code (Archivo > Abrir carpeta).
+Para verla en el navegador: doble clic en index.html, o la extensión "Live Server".
+
+Estructura
+  index.html            Inicio (presentación de la empresa, sectores y RASIC)
+  industria.html        Industria y emergencias: mantenimiento, alquiler y venta
+  submarinismo.html     Submarinismo: cómo funciona, mantenimiento, alquiler y venta
+  contacto.html         Dirección, teléfono, correo, horario y cómo llegar
+  legislacion.html      Normativa aplicable, con enlaces al BOE
+  acreditaciones.html   Autorización RASIC
+  aviso-legal.html      Aviso legal (texto provisional)
+  privacidad.html       Política de privacidad y cookies (texto provisional)
+  css/estilos.css       Todos los estilos (colores al principio del archivo)
+  fonts/                Fuente IBM Plex Sans alojada en la web (sin Google Fonts)
+  img/                  Logo e ilustraciones provisionales
+  docs/                 Hoja de síntesis del RASIC (solo la página 1 del permiso)
+
+El menú y el pie están repetidos en cada página: si se cambian, hay que
+cambiarlos en las ocho.
+
+La web no usa cookies ni carga nada de otros servidores. Si se añade un mapa
+de Google, vídeos o estadísticas, habría que poner aviso de cookies.
+
+Imágenes provisionales
+  Las fotos img/taller-*.jpg y img/fachada.jpg están recortadas de capturas del
+  Instagram de la empresa (baja resolución). La portada y las tarjetas de
+  sectores de Industria siguen con dibujos (img/*.svg). Para cambiar una:
+  guardar la foto en img/ (por ejemplo img/fachada.jpg), cambiar el src en el
+  HTML y quitar la clase "provisional" del bloque que la contiene (es la que
+  pone la etiqueta "Imagen provisional").
+
+Datos resaltados en amarillo (clase "pendiente")
+  Son datos por confirmar: registro mercantil y revisión de los textos legales.
+
+Documentos privados
+  El PDF completo del permiso RASIC contiene el DNI, el teléfono y la firma del
+  administrador. Se ha movido fuera de la web, a
+  ..\AIR300-documentos-privados\permiso-rasic.pdf. No subirlo al servidor.
+
+Retirado por decisión de la gerencia (octubre 2026)
+  - Certificados ISO 9001 e ISO 14001 (caducados) y sellos SGS/ENAC.
+  - Franja de logos de financiación europea e instalación fotovoltaica.
+    Conviene confirmar con la gestoría que la subvención de autoconsumo
+    no obliga a mantener esa publicidad en la web.
+
+Pendiente antes de publicar
+  - Confirmar el horario (contacto.html). Se ha tomado de directorios de empresas.
+  - Completar los datos resaltados en amarillo.
+  - Sustituir las imágenes provisionales por fotos reales.
+  - Nombres de archivo: la web antigua usa Industria.html, Submarinismo.html,
+    Contacto.html, Legislacion.html y Acreditaciones.html (con mayúscula).
+    Mantener esos nombres o poner redirecciones para no perder las visitas
+    que llegan desde Google.
+  - Retirar las ISO de la web antigua mientras siga publicada.

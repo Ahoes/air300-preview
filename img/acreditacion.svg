@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Imagen provisional: certificado de inscripción con sello, sobre la mesa -->
+<svg viewBox="0 0 380 440" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mesa" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2A4256"/><stop offset="1" stop-color="#0B1E2E"/></linearGradient>
+    <linearGradient id="sello" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2E5E99"/><stop offset="1" stop-color="#1F3A5F"/></linearGradient>
+  </defs>
+  <rect width="380" height="440" fill="url(#mesa)"/>
+
+  <!-- Hoja de abajo -->
+  <g transform="rotate(5 190 220)">
+    <rect x="70" y="58" width="250" height="330" fill="#C9D1D8"/>
+  </g>
+
+  <!-- Certificado -->
+  <g transform="rotate(-4 190 220)">
+    <rect x="58" y="48" width="256" height="340" fill="#000000" opacity="0.25" transform="translate(6 8)"/>
+    <rect x="58" y="48" width="256" height="340" fill="#FAFBFC"/>
+    <rect x="58" y="48" width="256" height="10" fill="#1F5A80"/>
+    <rect x="80" y="78" width="120" height="10" fill="#1A3044"/>
+    <rect x="80" y="96" width="80" height="6" fill="#8FA2B2"/>
+    <rect x="80" y="126" width="212" height="2" fill="#C9D1D8"/>
+    <g fill="#A7B3BD">
+      <rect x="80" y="144" width="200" height="5"/>
+      <rect x="80" y="158" width="186" height="5"/>
+      <rect x="80" y="172" width="206" height="5"/>
+      <rect x="80" y="186" width="140" height="5"/>
+      <rect x="80" y="210" width="196" height="5"/>
+      <rect x="80" y="224" width="170" height="5"/>
+      <rect x="80" y="238" width="120" height="5"/>
+    </g>
+    <!-- Casillas marcadas -->
+    <g stroke="#1A3044" stroke-width="2" fill="none">
+      <rect x="80" y="262" width="12" height="12"/>
+      <rect x="80" y="284" width="12" height="12"/>
+      <rect x="80" y="306" width="12" height="12"/>
+      <path d="M82 268 l4 4 l6 -8 M82 290 l4 4 l6 -8 M82 312 l4 4 l6 -8" stroke="#2E7D4F" stroke-width="2.5"/>
+    </g>
+    <g fill="#A7B3BD">
+      <rect x="102" y="265" width="110" height="5"/>
+      <rect x="102" y="287" width="96" height="5"/>
+      <rect x="102" y="309" width="120" height="5"/>
+    </g>
+    <!-- Firma -->
+    <path d="M90 360 c14 -18 22 6 34 -6 s14 -16 22 0 s18 -8 30 -2" fill="none" stroke="#1F3A5F" stroke-width="2"/>
+    <rect x="86" y="368" width="96" height="1.5" fill="#8FA2B2"/>
+  </g>
+
+  <!-- Cuño estampado -->
+  <g transform="rotate(-14 236 338)" opacity="0.7">
+    <circle cx="236" cy="338" r="34" fill="none" stroke="#2E5E99" stroke-width="3"/>
+    <circle cx="236" cy="338" r="26" fill="none" stroke="#2E5E99" stroke-width="1.5"/>
+    <rect x="216" y="333" width="40" height="10" fill="#2E5E99"/>
+  </g>
+
+  <!-- Sello con cintas -->
+  <path d="M270 140 L256 214 L272 204 L282 220 L292 150 Z" fill="#B4441C"/>
+  <path d="M300 140 L318 210 L302 202 L294 220 L282 150 Z" fill="#8E3414"/>
+  <g transform="translate(286 130)">
+    <circle r="42" fill="url(#sello)"/>
+    <circle r="42" fill="none" stroke="#C9D1D8" stroke-width="3" stroke-dasharray="4 4"/>
+    <circle r="30" fill="none" stroke="#C9D1D8" stroke-width="2"/>
+    <path d="M-14 0 l10 11 l20 -24" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Bolígrafo -->
+  <g transform="rotate(38 300 360)">
+    <rect x="236" y="354" width="120" height="12" rx="6" fill="#1A3044"/>
+    <rect x="320" y="354" width="10" height="12" fill="#A9B6C0"/>
+    <path d="M236 354 L218 360 L236 366 Z" fill="#C9D1D8"/>
+  </g>
+</svg>

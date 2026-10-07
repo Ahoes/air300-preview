@@ -1,0 +1,204 @@
+/* AIR300 S.L. – estilos generales */
+
+/* Fuente IBM Plex Sans alojada en la propia web (fonts/, licencia SIL Open Font License) */
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/ibm-plex-sans-400.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 500; font-display: swap; src: url("../fonts/ibm-plex-sans-500.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 600; font-display: swap; src: url("../fonts/ibm-plex-sans-600.woff2") format("woff2"); }
+
+:root {
+  --azul-noche: #0B1E2E;
+  --azul-acero: #1F5A80;
+  --texto: #1A1F24;
+  --texto-suave: #333A41;
+  --gris: #5A636B;
+  --gris-claro: #A7B3BD;
+  --linea: #DADDE0;
+  --linea-oscura: #C9CDD1;
+  --fondo-gris: #F2F3F4;
+  --ancho: 1160px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Tamaños de letra en rem para respetar el tamaño elegido en el navegador (1rem = 16px por defecto) */
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--texto);
+  background: #FFFFFF;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--azul-acero); }
+a:hover { color: var(--azul-noche); }
+a:focus-visible { outline: 2px solid var(--azul-acero); outline-offset: 3px; }
+
+h1, h2, h3 { color: var(--azul-noche); font-weight: 600; line-height: 1.25; margin: 0; }
+h1 { font-size: 2.125rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.0625rem; }
+p { margin: 0; }
+
+.contenedor { max-width: var(--ancho); margin: 0 auto; padding: 0 24px; }
+
+/* Accesibilidad: enlace para saltar el menú y texto solo para lectores de pantalla */
+.saltar {
+  position: absolute; left: 16px; top: -100px; z-index: 10;
+  padding: 10px 16px; background: var(--azul-noche); color: #FFFFFF;
+}
+.saltar:focus { top: 16px; color: #FFFFFF; }
+.oculto {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+/* Cabecera */
+.cabecera { border-bottom: 1px solid var(--linea); background: #FFFFFF; }
+.cabecera .contenedor {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 16px; padding-top: 20px; padding-bottom: 20px;
+}
+.logo img { height: 58px; width: auto; }
+.menu { order: 2; margin-left: auto; display: flex; flex-wrap: wrap; gap: 4px; font-size: 0.9375rem; }
+.cabecera-tel {
+  order: 3; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px;
+  border: 1px solid var(--azul-noche); color: var(--azul-noche);
+  font-weight: 600; text-decoration: none; white-space: nowrap;
+}
+.cabecera-tel:hover { background: var(--azul-noche); color: #FFFFFF; }
+.menu a { color: var(--texto); text-decoration: none; padding: 10px 14px; border-bottom: 2px solid transparent; }
+.menu a:hover { border-bottom-color: var(--linea-oscura); }
+.menu a[aria-current="page"] { border-bottom-color: var(--azul-noche); }
+
+/* Portada */
+.portada { background: var(--azul-noche); border-bottom: 4px solid var(--azul-acero); }
+.portada img { width: 100%; height: 460px; object-fit: cover; }
+
+/* Fotos de las páginas interiores */
+.foto { position: relative; margin-top: 32px; margin-bottom: 24px; }
+.foto img { width: 100%; height: 340px; object-fit: cover; }
+
+/* Marca de imagen provisional: quitar la clase "provisional" al poner la foto real */
+.provisional { position: relative; }
+.provisional::after {
+  content: "Imagen provisional"; position: absolute; top: 12px; left: 12px;
+  padding: 2px 8px; font-size: 0.75rem; color: #FFFFFF; background: rgba(11, 30, 46, 0.8);
+}
+
+/* Datos que faltan por confirmar: se ven resaltados para revisarlos */
+.pendiente { background: #FFF1B8; padding: 0 4px; }
+
+.bloque { padding-top: 64px; padding-bottom: 64px; }
+.bloque-gris { background: var(--fondo-gris); border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); }
+.bloque-titulo { margin-bottom: 28px; }
+
+.dos-columnas { display: flex; flex-wrap: wrap; gap: 48px; }
+.dos-columnas > :first-child { flex: 1 1 380px; }
+.dos-columnas > :last-child { flex: 1 1 520px; }
+.texto { display: flex; flex-direction: column; gap: 16px; color: var(--texto-suave); }
+
+/* Sectores */
+.sectores { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px; }
+.sector { display: flex; flex-direction: column; gap: 12px; }
+.sector img { width: 100%; height: 170px; object-fit: cover; }.sector p { font-size: 0.9375rem; color: var(--texto-suave); }
+.sectores-grandes .sector img { height: 300px; }
+.sector h3 a { color: inherit; text-underline-offset: 3px; }
+.sector h3 a:hover { color: var(--azul-acero); }
+
+/* Autorización y documentación (portada) */
+.calidad { border-top: 1px solid var(--linea); }
+.calidad .contenedor { display: flex; flex-wrap: wrap; gap: 48px; padding-top: 56px; padding-bottom: 56px; }
+.calidad .columna { display: flex; flex-direction: column; gap: 12px; }
+.calidad .columna:first-child { flex: 1 1 480px; }
+.calidad .columna:last-child { flex: 1 1 360px; }
+.calidad a { font-weight: 500; }
+
+/* Pie */
+.pie { background: var(--azul-noche); color: var(--gris-claro); border-top: 1px solid #22384A; font-size: 0.8125rem; }
+.pie .contenedor { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 18px; padding-bottom: 18px; }
+.pie a { color: var(--gris-claro); }
+
+/* Páginas interiores: industria, submarinismo, contacto, legislación y acreditaciones */
+.migas { font-size: 0.8125rem; color: var(--gris); margin-bottom: 12px; }
+.migas a { color: var(--gris); }
+.intro { padding-top: 56px; padding-bottom: 28px; }
+.intro h1 { margin-bottom: 16px; }
+.intro p { max-width: 760px; color: var(--texto-suave); }
+
+/* Introducción con foto vertical a la derecha */
+.intro-con-foto { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px 48px; }
+.intro-texto { flex: 1 1 420px; }
+.intro-con-foto .foto { flex: 0 1 380px; margin: 0; }
+.intro-con-foto .foto img { height: 440px; }
+.documentos { padding-bottom: 40px; }
+.documento {
+  display: flex; flex-wrap: wrap; gap: 24px 48px;
+  padding: 40px 0; border-top: 2px solid var(--azul-noche);
+}
+.documento-resumen { flex: 1 1 300px; display: flex; flex-direction: column; gap: 10px; }
+.documento-resumen p { color: var(--texto-suave); }
+.documento-miniatura { display: block; width: 180px; margin-top: 8px; border: 1px solid var(--linea-oscura); }
+.documento-miniatura:hover { border-color: var(--azul-noche); }
+.documento-datos { flex: 2 1 520px; margin: 0; }
+.documento-datos div { display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 12px 0; border-bottom: 1px solid var(--linea); }
+.documento-datos dt { flex: 0 1 220px; font-size: 0.8125rem; color: var(--gris); padding-top: 2px; }
+.documento-datos dd { flex: 1 1 360px; margin: 0; }
+
+.legal { flex: 2 1 520px; display: flex; flex-direction: column; gap: 14px; color: var(--texto-suave); }
+
+.lista { flex: 2 1 520px; margin: 0; padding: 0; list-style: none; }
+.lista li { padding: 12px 0; border-bottom: 1px solid var(--linea); }
+
+/* Bloque de consulta con botón de presupuesto */
+.consulta {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px;
+  padding: 24px 0 0; border-top: 2px solid var(--azul-noche); color: var(--texto-suave);
+}
+.consulta .boton { margin-top: 0; }
+
+/* Contacto */
+.contacto-foto { flex: 2 1 420px; display: flex; flex-direction: column; gap: 16px; }
+.contacto-foto .foto { margin-top: 0; }
+.contacto-foto .foto img { height: 300px; }
+
+.boton {
+  align-self: flex-start; margin-top: 8px;
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px;
+  border: 1px solid var(--azul-noche); color: var(--azul-noche);
+  text-decoration: none; font-weight: 500;
+}
+.boton:hover { background: var(--azul-noche); color: #FFFFFF; }
+
+/* Móvil */
+@media (max-width: 640px) {
+  .contenedor { padding: 0 16px; }
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.375rem; }
+
+  .cabecera .contenedor { gap: 8px; padding-top: 14px; padding-bottom: 10px; }
+  .logo img { height: 48px; }
+  .menu { order: 3; width: 100%; gap: 0; margin-left: -10px; }
+  .menu a { padding: 10px; }
+  .cabecera-tel { order: 2; margin-left: auto; }
+
+  .portada img { height: 260px; }
+  .foto img, .contacto-foto .foto img { height: 200px; }
+  .intro-con-foto .foto { flex: 1 1 100%; }
+  .intro-con-foto .foto img { height: 300px; }
+
+  .bloque { padding-top: 40px; padding-bottom: 40px; }
+  .bloque-titulo { margin-bottom: 20px; }
+  .dos-columnas { gap: 20px; }
+  .sectores { gap: 28px; }
+  .sectores-grandes .sector img { height: 220px; }
+  .calidad .contenedor { gap: 32px; padding-top: 40px; padding-bottom: 40px; }
+
+  .intro { padding-top: 32px; }
+  .documento { padding: 28px 0; }
+}
+
+/* Solo en la versión de prueba */
+.aviso-prueba { padding: 6px 16px; background: #FFF1B8; color: #1A1F24; font-size: 0.8125rem; text-align: center; border-bottom: 1px solid #E6D48A; }
