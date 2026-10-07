@@ -11,7 +11,8 @@ Estructura
   legislacion.html      Normativa aplicable, con enlaces al BOE
   acreditaciones.html   Autorización RASIC
   aviso-legal.html      Aviso legal (texto provisional)
-  privacidad.html       Política de privacidad y cookies (texto provisional)
+  privacidad.html       Política de privacidad y cookies (revisar si se añaden
+                        formularios, estadísticas, mapas o chats)
   css/estilos.css       Todos los estilos (colores al principio del archivo)
   fonts/                Fuente IBM Plex Sans alojada en la web (sin Google Fonts)
   img/                  Logo e ilustraciones provisionales
@@ -32,7 +33,7 @@ Imágenes provisionales
   pone la etiqueta "Imagen provisional").
 
 Datos resaltados en amarillo (clase "pendiente")
-  Son datos por confirmar: registro mercantil y revisión de los textos legales.
+  Son datos por confirmar: registro mercantil y revisión del aviso legal.
 
 Documentos privados
   El PDF completo del permiso RASIC contiene el DNI, el teléfono y la firma del
