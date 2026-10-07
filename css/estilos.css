@@ -15,10 +15,19 @@
   --linea: #DADDE0;
   --linea-oscura: #C9CDD1;
   --fondo-gris: #F2F3F4;
+  --fondo: #DCEBF5;          /* fondo general: azul claro de la fachada de la nave */
+  --fondo-medio: #CCDFEE;    /* franjas alternas */
+  --panel: #FFFFFF;          /* paneles de contenido sobre el fondo azul */
+  --azul-claro: #8EC3E6;     /* azul de la chapa de la fachada, para detalles */
+  --azul-pizarra: #1F3A52;   /* bloque destacado de la portada */
+  --texto-sobre-oscuro: #C9D3DC;
   --ancho: 1160px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+
+/* Fondo de la ventana igual que el pie: en páginas cortas no queda una franja clara debajo */
+html { background: var(--azul-noche); }
 
 /* Tamaños de letra en rem para respetar el tamaño elegido en el navegador (1rem = 16px por defecto) */
 body {
@@ -27,7 +36,7 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   color: var(--texto);
-  background: #FFFFFF;
+  background: var(--fondo);
 }
 
 img { max-width: 100%; height: auto; display: block; }
@@ -65,16 +74,16 @@ p { margin: 0; }
 .menu { order: 2; margin-left: auto; display: flex; flex-wrap: wrap; gap: 4px; font-size: 0.9375rem; }
 .cabecera-tel {
   order: 3; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px;
-  border: 1px solid var(--azul-noche); color: var(--azul-noche);
+  border: 1px solid var(--azul-noche); background: var(--azul-noche); color: #FFFFFF;
   font-weight: 600; text-decoration: none; white-space: nowrap;
 }
-.cabecera-tel:hover { background: var(--azul-noche); color: #FFFFFF; }
+.cabecera-tel:hover { background: var(--azul-acero); border-color: var(--azul-acero); color: #FFFFFF; }
 .menu a { color: var(--texto); text-decoration: none; padding: 10px 14px; border-bottom: 2px solid transparent; }
 .menu a:hover { border-bottom-color: var(--linea-oscura); }
 .menu a[aria-current="page"] { border-bottom-color: var(--azul-noche); }
 
 /* Portada */
-.portada { background: var(--azul-noche); border-bottom: 4px solid var(--azul-acero); }
+.portada { background: var(--azul-noche); border-bottom: 4px solid var(--azul-claro); }
 .portada img { width: 100%; height: 460px; object-fit: cover; }
 
 /* Fotos de las páginas interiores */
@@ -92,7 +101,7 @@ p { margin: 0; }
 .pendiente { background: #FFF1B8; padding: 0 4px; }
 
 .bloque { padding-top: 64px; padding-bottom: 64px; }
-.bloque-gris { background: var(--fondo-gris); border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); }
+.bloque-gris { background: var(--fondo-medio); border-top: 1px solid var(--linea-oscura); border-bottom: 1px solid var(--linea-oscura); }
 .bloque-titulo { margin-bottom: 28px; }
 
 .dos-columnas { display: flex; flex-wrap: wrap; gap: 48px; }
@@ -102,19 +111,24 @@ p { margin: 0; }
 
 /* Sectores */
 .sectores { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px; }
-.sector { display: flex; flex-direction: column; gap: 12px; }
-.sector img { width: 100%; height: 170px; object-fit: cover; }.sector p { font-size: 0.9375rem; color: var(--texto-suave); }
+.sector { display: flex; flex-direction: column; gap: 12px; padding-bottom: 20px; background: var(--panel); }
+.sector h3, .sector p { padding: 0 20px; }
+.sector img { width: 100%; height: 170px; object-fit: cover; }
+.sector p { font-size: 0.9375rem; color: var(--texto-suave); }
 .sectores-grandes .sector img { height: 300px; }
 .sector h3 a { color: inherit; text-underline-offset: 3px; }
 .sector h3 a:hover { color: var(--azul-acero); }
 
 /* Autorización y documentación (portada) */
-.calidad { border-top: 1px solid var(--linea); }
+.calidad { background: var(--azul-pizarra); color: var(--texto-sobre-oscuro); border-bottom: 1px solid #2E4A63; }
 .calidad .contenedor { display: flex; flex-wrap: wrap; gap: 48px; padding-top: 56px; padding-bottom: 56px; }
 .calidad .columna { display: flex; flex-direction: column; gap: 12px; }
 .calidad .columna:first-child { flex: 1 1 480px; }
 .calidad .columna:last-child { flex: 1 1 360px; }
-.calidad a { font-weight: 500; }
+.calidad h2, .calidad strong { color: #FFFFFF; }
+.calidad a { color: #FFFFFF; font-weight: 500; text-underline-offset: 3px; }
+.calidad a:hover { color: var(--texto-sobre-oscuro); }
+.calidad a:focus-visible { outline-color: #FFFFFF; }
 
 /* Pie */
 .pie { background: var(--azul-noche); color: var(--gris-claro); border-top: 1px solid #22384A; font-size: 0.8125rem; }
@@ -122,11 +136,17 @@ p { margin: 0; }
 .pie a { color: var(--gris-claro); }
 
 /* Páginas interiores: industria, submarinismo, contacto, legislación y acreditaciones */
-.migas { font-size: 0.8125rem; color: var(--gris); margin-bottom: 12px; }
-.migas a { color: var(--gris); }
-.intro { padding-top: 56px; padding-bottom: 28px; }
-.intro h1 { margin-bottom: 16px; }
-.intro p { max-width: 760px; color: var(--texto-suave); }
+/* Introducción sobre franja azul marino a todo el ancho (la sombra extiende el fondo fuera del contenedor) */
+.intro {
+  padding-top: 56px; padding-bottom: 48px; margin-bottom: 40px;
+  background: var(--azul-noche); box-shadow: 0 0 0 100vmax var(--azul-noche); clip-path: inset(0 -100vmax);
+}
+.migas { font-size: 0.8125rem; color: var(--gris-claro); margin-bottom: 12px; }
+.migas a { color: var(--gris-claro); }
+.migas a:focus-visible, .intro a:focus-visible { outline-color: #FFFFFF; }
+.intro h1 { margin-bottom: 16px; color: #FFFFFF; }
+.intro p { max-width: 760px; color: var(--texto-sobre-oscuro); }
+.intro .pendiente { color: var(--texto); }
 
 /* Introducción con foto vertical a la derecha */
 .intro-con-foto { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px 48px; }
@@ -136,7 +156,8 @@ p { margin: 0; }
 .documentos { padding-bottom: 40px; }
 .documento {
   display: flex; flex-wrap: wrap; gap: 24px 48px;
-  padding: 40px 0; border-top: 2px solid var(--azul-noche);
+  padding: 36px 36px 40px; margin-bottom: 20px;
+  background: var(--panel); border-top: 4px solid var(--azul-noche);
 }
 .documento-resumen { flex: 1 1 300px; display: flex; flex-direction: column; gap: 10px; }
 .documento-resumen p { color: var(--texto-suave); }
@@ -155,8 +176,10 @@ p { margin: 0; }
 /* Bloque de consulta con botón de presupuesto */
 .consulta {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px;
-  padding: 24px 0 0; border-top: 2px solid var(--azul-noche); color: var(--texto-suave);
+  padding: 24px 36px; background: var(--azul-noche); color: var(--texto-sobre-oscuro);
 }
+.consulta a:not(.boton) { color: #FFFFFF; }
+.consulta a:focus-visible { outline-color: #FFFFFF; }
 .consulta .boton { margin-top: 0; }
 
 /* Contacto */
@@ -167,10 +190,13 @@ p { margin: 0; }
 .boton {
   align-self: flex-start; margin-top: 8px;
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px;
-  border: 1px solid var(--azul-noche); color: var(--azul-noche);
-  text-decoration: none; font-weight: 500;
+  border: 1px solid var(--azul-noche); background: var(--azul-noche); color: #FFFFFF;
+  text-decoration: none; font-weight: 600;
 }
-.boton:hover { background: var(--azul-noche); color: #FFFFFF; }
+.boton:hover { background: var(--azul-acero); border-color: var(--azul-acero); color: #FFFFFF; }
+/* Sobre fondo oscuro, botón blanco */
+.consulta .boton { background: #FFFFFF; border-color: #FFFFFF; color: var(--azul-noche); }
+.consulta .boton:hover { background: var(--azul-claro); border-color: var(--azul-claro); color: var(--azul-noche); }
 
 /* Móvil */
 @media (max-width: 640px) {
@@ -196,6 +222,59 @@ p { margin: 0; }
   .sectores-grandes .sector img { height: 220px; }
   .calidad .contenedor { gap: 32px; padding-top: 40px; padding-bottom: 40px; }
 
-  .intro { padding-top: 32px; }
-  .documento { padding: 28px 0; }
+  .intro { padding-top: 32px; padding-bottom: 32px; margin-bottom: 28px; }
+  .documento { padding: 24px 20px 28px; }
+  .consulta { padding: 20px; }
+}
+
+/* ===== Movimiento ===== */
+/* Todo es CSS. Si el sistema pide "reducir movimiento", se desactiva al final del archivo. */
+
+html { scroll-behavior: smooth; }
+
+/* Transiciones suaves en enlaces y botones */
+.menu a { transition: border-color 0.2s ease, color 0.2s ease; }
+.boton, .cabecera-tel { transition: background-color 0.2s ease, color 0.2s ease; }
+
+/* Cabecera fija en pantallas grandes, con sombra al bajar */
+@media (min-width: 641px) {
+  .cabecera { position: sticky; top: 0; z-index: 20; }
+  html { scroll-padding-top: 110px; }
+  @supports (animation-timeline: scroll()) {
+    .cabecera { animation: cabecera-sombra linear both; animation-timeline: scroll(); animation-range: 0 140px; }
+  }
+}
+@keyframes cabecera-sombra { to { box-shadow: 0 2px 14px rgba(11, 30, 46, 0.14); } }
+
+/* Entrada al cargar: la imagen principal se acerca y el texto aparece */
+.portada { overflow: hidden; }
+.portada img { animation: portada-entrada 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes portada-entrada { from { transform: scale(1.08); opacity: 0.4; } to { transform: none; opacity: 1; } }
+
+.dos-columnas > *, .intro-texto > *, .intro > h1, .intro > p, .intro-con-foto > .foto {
+  animation: subir 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.dos-columnas > :nth-child(2), .intro-texto > :nth-child(2), .intro > h1 { animation-delay: 0.12s; }
+.intro-texto > :nth-child(3), .intro > p, .intro-con-foto > .foto { animation-delay: 0.24s; }
+@keyframes subir { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+/* Aparición de los bloques al hacer scroll (navegadores que lo admiten; en el resto se ven sin efecto) */
+@supports (animation-timeline: view()) {
+  .documento, .sector, .calidad .columna, .consulta {
+    animation: aparecer linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 45%;
+  }
+}
+@keyframes aparecer { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+
+/* Fotos de sectores: ligero acercamiento al pasar el ratón */
+.sector .provisional { overflow: hidden; }
+.sector img { transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.sector:hover img { transform: scale(1.05); }
+
+/* Respetar la preferencia de reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
