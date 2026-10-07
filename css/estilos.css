@@ -199,6 +199,3 @@ p { margin: 0; }
   .intro { padding-top: 32px; }
   .documento { padding: 28px 0; }
 }
-
-/* Solo en la versión de prueba */
-.aviso-prueba { padding: 6px 16px; background: #FFF1B8; color: #1A1F24; font-size: 0.8125rem; text-align: center; border-bottom: 1px solid #E6D48A; }
