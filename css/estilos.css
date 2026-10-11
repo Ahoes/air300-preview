@@ -12,8 +12,8 @@
   --texto-suave: #333A41;
   --gris: #5A636B;
   --gris-claro: #A7B3BD;
-  --linea: #DADDE0;
-  --linea-oscura: #C9CDD1;
+  --linea: rgba(11, 30, 46, 0.14);
+  --linea-oscura: rgba(11, 30, 46, 0.22);
   --fondo-gris: #F2F3F4;
   --fondo: #DCEBF5;          /* fondo general: azul claro de la fachada de la nave */
   --fondo-medio: #CCDFEE;    /* franjas alternas */
@@ -138,40 +138,54 @@ p { margin: 0; }
 /* Páginas interiores: industria, submarinismo, contacto, legislación y acreditaciones */
 /* Introducción sobre franja azul marino a todo el ancho (la sombra extiende el fondo fuera del contenedor) */
 .intro {
-  padding-top: 56px; padding-bottom: 48px; margin-bottom: 40px;
+  padding-top: 72px; padding-bottom: 64px; margin-bottom: 40px;
   background: var(--azul-noche); box-shadow: 0 0 0 100vmax var(--azul-noche); clip-path: inset(0 -100vmax);
 }
 .migas { font-size: 0.8125rem; color: var(--gris-claro); margin-bottom: 12px; }
 .migas a { color: var(--gris-claro); }
-.migas a:focus-visible, .intro a:focus-visible { outline-color: #FFFFFF; }
-.intro h1 { margin-bottom: 16px; color: #FFFFFF; }
-.intro p { max-width: 760px; color: var(--texto-sobre-oscuro); }
+.migas a:hover { color: #FFFFFF; }
+.migas a:focus-visible, .intro a:focus-visible, .pagina-hero a:focus-visible { outline-color: #FFFFFF; }
+.intro h1, .pagina-hero h1 {
+  margin-bottom: 16px; color: #FFFFFF; text-wrap: balance;
+  font-size: clamp(2rem, 1.3rem + 2.4vw, 3rem); line-height: 1.1; letter-spacing: -0.01em;
+}
+.intro p, .pagina-hero p { max-width: 640px; font-size: 1.0625rem; color: var(--texto-sobre-oscuro); }
 .intro .pendiente { color: var(--texto); }
 
-/* Introducción con foto vertical a la derecha */
-.intro-con-foto { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px 48px; }
-.intro-texto { flex: 1 1 420px; }
-.intro-con-foto .foto { flex: 0 1 380px; margin: 0; }
-.intro-con-foto .foto img { height: 440px; }
-.documentos { padding-bottom: 40px; }
-.documento {
-  display: flex; flex-wrap: wrap; gap: 24px 48px;
-  padding: 36px 36px 40px; margin-bottom: 20px;
-  background: var(--panel); border-top: 4px solid var(--azul-noche);
+/* Cabecera partida: texto sobre azul noche alineado con el contenido, foto de la mitad hasta el borde derecho */
+.pagina-hero {
+  display: grid; margin-bottom: 40px; background: var(--azul-noche);
+  grid-template-columns: minmax(24px, 1fr) minmax(0, calc(var(--ancho) / 2 - 24px)) minmax(0, calc(var(--ancho) / 2 - 24px)) minmax(24px, 1fr);
 }
-.documento-resumen { flex: 1 1 300px; display: flex; flex-direction: column; gap: 10px; }
+.pagina-hero-texto { grid-column: 2; display: flex; flex-direction: column; justify-content: flex-end; padding: 72px 48px 64px 0; }
+.pagina-hero-foto { grid-column: 3 / 5; position: relative; min-height: clamp(380px, 48vh, 480px); }
+.pagina-hero-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* Fotos que se alternan (Industria): una encima de otra; la de arriba aparece y desaparece con un fundido */
+.alterna::after { z-index: 2; }
+.alterna img:nth-child(2) { opacity: 0; }
+
+/* Bloques de contenido: sin paneles, separados por un filete azul noche como en la portada */
+.documentos { padding-bottom: 64px; }
+.documento {
+  display: flex; flex-wrap: wrap; gap: 24px 64px;
+  padding: 40px 0 48px; border-top: 2px solid var(--azul-noche);
+}
+.documento-resumen { flex: 1 1 300px; display: flex; flex-direction: column; gap: 12px; }
+.documento-resumen h2 { font-size: clamp(1.5rem, 1.2rem + 0.9vw, 2rem); line-height: 1.15; }
 .documento-resumen p { color: var(--texto-suave); }
 .documento-miniatura { display: block; width: 180px; margin-top: 8px; border: 1px solid var(--linea-oscura); }
 .documento-miniatura:hover { border-color: var(--azul-noche); }
 .documento-datos { flex: 2 1 520px; margin: 0; }
-.documento-datos div { display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 12px 0; border-bottom: 1px solid var(--linea); }
+.documento-datos div { display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 14px 0; border-bottom: 1px solid var(--linea-oscura); }
 .documento-datos dt { flex: 0 1 220px; font-size: 0.8125rem; color: var(--gris); padding-top: 2px; }
-.documento-datos dd { flex: 1 1 360px; margin: 0; }
+.documento-datos dd { flex: 1 1 360px; margin: 0; color: var(--azul-noche); }
 
 .legal { flex: 2 1 520px; display: flex; flex-direction: column; gap: 14px; color: var(--texto-suave); }
 
 .lista { flex: 2 1 520px; margin: 0; padding: 0; list-style: none; }
-.lista li { padding: 12px 0; border-bottom: 1px solid var(--linea); }
+.lista li { padding: 14px 0; border-bottom: 1px solid var(--linea-oscura); font-size: 1.0625rem; color: var(--azul-noche); }
+.lista li:first-child { padding-top: 4px; }
 
 /* Bloque de consulta con botón de presupuesto */
 .consulta {
@@ -198,6 +212,69 @@ p { margin: 0; }
 .consulta .boton { background: #FFFFFF; border-color: #FFFFFF; color: var(--azul-noche); }
 .consulta .boton:hover { background: var(--azul-claro); border-color: var(--azul-claro); color: var(--azul-noche); }
 
+/* ===== Portada: taller a la vista ===== */
+/* Imagen a todo el ancho con el texto encima; imagen y capa ocupan la misma celda de la rejilla */
+.hero { display: grid; background: var(--azul-noche); overflow: hidden; }
+.hero > * { grid-area: 1 / 1; }
+.hero-imagen img { width: 100%; height: 100%; min-height: clamp(520px, 74vh, 700px); object-fit: cover; }
+.hero-imagen::after { z-index: 2; }
+.hero-capa {
+  z-index: 1; display: flex; align-items: flex-end;
+  background: linear-gradient(90deg, rgba(11, 30, 46, 0.95) 0%, rgba(11, 30, 46, 0.86) 36%, rgba(11, 30, 46, 0.42) 66%, rgba(11, 30, 46, 0.1) 100%);
+}
+.hero-texto { width: 100%; display: flex; flex-direction: column; gap: 20px; padding-top: 96px; padding-bottom: 72px; }
+.hero h1 {
+  max-width: 660px; color: #FFFFFF; text-wrap: balance;
+  font-size: clamp(2.25rem, 1.3rem + 3.2vw, 3.75rem); line-height: 1.08; letter-spacing: -0.015em;
+}
+.hero p { max-width: 560px; font-size: 1.125rem; color: var(--texto-sobre-oscuro); }
+.franja-sector h2 a:focus-visible { outline-color: #FFFFFF; }
+
+/* Sectores: dos fotos grandes, de borde a borde; toda la foto es enlace */
+.franja-sectores {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+  gap: 2px; background: var(--azul-noche);
+}
+.franja-sector { position: relative; display: grid; overflow: hidden; }
+.franja-sector > * { grid-area: 1 / 1; }
+.franja-sector-foto img { width: 100%; height: clamp(380px, 46vw, 600px); object-fit: cover; }
+.franja-sector-texto {
+  z-index: 1; align-self: end; display: flex; flex-direction: column; gap: 8px; padding: 112px 40px 36px;
+  background: linear-gradient(to top, rgba(11, 30, 46, 0.94) 0%, rgba(11, 30, 46, 0.72) 55%, rgba(11, 30, 46, 0) 100%);
+}
+.franja-sector h2 { color: #FFFFFF; font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.125rem); line-height: 1.15; }
+.franja-sector h2 a { color: #FFFFFF; text-decoration: none; text-underline-offset: 5px; }
+.franja-sector h2 a::before { content: ""; position: absolute; inset: 0; z-index: 3; }
+.franja-sector:hover h2 a { text-decoration: underline; }
+.franja-sector p { max-width: 460px; color: var(--texto-sobre-oscuro); }
+
+/* Servicios del taller: lista con filetes, sin tarjetas */
+.inicio-servicios {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 28px 64px;
+  padding-top: 80px; padding-bottom: 80px;
+}
+.inicio-servicios-titulo { display: flex; flex-direction: column; gap: 12px; }
+.inicio-servicios h2 { font-size: clamp(1.625rem, 1.2rem + 1.2vw, 2.25rem); line-height: 1.15; }
+.inicio-servicios-titulo p { max-width: 380px; color: var(--texto-suave); }
+.inicio-servicios ul { margin: 0; padding: 0; list-style: none; border-top: 2px solid var(--azul-noche); }
+.inicio-servicios li { padding: 16px 0; border-bottom: 1px solid var(--linea-oscura); font-size: 1.0625rem; color: var(--azul-noche); }
+
+@media (max-width: 860px) {
+  .inicio-servicios { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  /* En móvil la imagen va arriba y el texto debajo, sobre azul noche */
+  .hero > * { grid-area: auto; }
+  .hero-imagen img { min-height: 0; height: 240px; }
+  .hero-capa { background: var(--azul-noche); }
+  .contenedor.hero-texto { gap: 16px; padding-top: 32px; padding-bottom: 40px; }
+  .hero p { font-size: 1rem; }
+  .franja-sector-foto img { height: 360px; }
+  .franja-sector-texto { padding: 88px 20px 24px; }
+  .contenedor.inicio-servicios { padding-top: 48px; padding-bottom: 48px; }
+}
+
 /* Móvil */
 @media (max-width: 640px) {
   .contenedor { padding: 0 16px; }
@@ -212,8 +289,13 @@ p { margin: 0; }
 
   .portada img { height: 260px; }
   .foto img, .contacto-foto .foto img { height: 200px; }
-  .intro-con-foto .foto { flex: 1 1 100%; }
-  .intro-con-foto .foto img { height: 300px; }
+  /* Cabecera partida en móvil: foto arriba, texto debajo */
+  .pagina-hero { grid-template-columns: 1fr; margin-bottom: 28px; }
+  .pagina-hero-foto { grid-column: 1; grid-row: 1; min-height: 0; }
+  .pagina-hero-foto img { position: static; height: 240px; }
+  .pagina-hero-texto { grid-column: 1; padding: 28px 16px 36px; }
+  .pagina-hero-foto.alterna { min-height: 240px; }
+  .pagina-hero-foto.alterna img { position: absolute; height: 100%; }
 
   .bloque { padding-top: 40px; padding-bottom: 40px; }
   .bloque-titulo { margin-bottom: 20px; }
@@ -222,8 +304,8 @@ p { margin: 0; }
   .sectores-grandes .sector img { height: 220px; }
   .calidad .contenedor { gap: 32px; padding-top: 40px; padding-bottom: 40px; }
 
-  .intro { padding-top: 32px; padding-bottom: 32px; margin-bottom: 28px; }
-  .documento { padding: 24px 20px 28px; }
+  .intro { padding-top: 36px; padding-bottom: 36px; margin-bottom: 28px; }
+  .documento { padding: 28px 0 36px; }
   .consulta { padding: 20px; }
 }
 
@@ -251,12 +333,27 @@ html { scroll-behavior: smooth; }
 .portada img { animation: portada-entrada 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 @keyframes portada-entrada { from { transform: scale(1.08); opacity: 0.4; } to { transform: none; opacity: 1; } }
 
-.dos-columnas > *, .intro-texto > *, .intro > h1, .intro > p, .intro-con-foto > .foto {
+.hero-imagen img { animation: portada-entrada 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.hero-texto > * { animation: subir 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.hero-texto > :nth-child(2) { animation-delay: 0.12s; }
+.hero-texto > :nth-child(3) { animation-delay: 0.24s; }
+.franja-sector-foto img { transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.franja-sector:has(a):hover .franja-sector-foto img { transform: scale(1.04); }
+
+.pagina-hero-texto > *, .intro > h1, .intro > p {
   animation: subir 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
-.dos-columnas > :nth-child(2), .intro-texto > :nth-child(2), .intro > h1 { animation-delay: 0.12s; }
-.intro-texto > :nth-child(3), .intro > p, .intro-con-foto > .foto { animation-delay: 0.24s; }
+.pagina-hero-texto > :nth-child(2), .intro > h1 { animation-delay: 0.12s; }
+.pagina-hero-texto > :nth-child(3), .intro > p { animation-delay: 0.24s; }
+.pagina-hero-foto { overflow: hidden; }
+.pagina-hero-foto img { animation: portada-entrada 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 @keyframes subir { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+/* Alternancia de las fotos de Industria: ciclo de 14 s, fundido de algo más de 1 s y acercamiento lento */
+.alterna img { animation: acercar 14s ease-in-out infinite alternate; }
+.alterna img:nth-child(2) { animation: alternar 14s ease-in-out infinite, acercar 14s ease-in-out infinite alternate; }
+@keyframes alternar { 0%, 42% { opacity: 0; } 50%, 92% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes acercar { from { transform: scale(1); } to { transform: scale(1.06); } }
 
 /* Aparición de los bloques al hacer scroll (navegadores que lo admiten; en el resto se ven sin efecto) */
 @supports (animation-timeline: view()) {
