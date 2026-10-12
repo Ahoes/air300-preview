@@ -64,23 +64,54 @@ p { margin: 0; }
   clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
 }
 
-/* Cabecera */
-.cabecera { border-bottom: 1px solid var(--linea); background: #FFFFFF; }
-.cabecera .contenedor {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-  gap: 16px; padding-top: 20px; padding-bottom: 20px;
+/* Cabecera: logo, teléfono y botón "Menú"; el menú se despliega en un panel (atributo popover, sin JavaScript) */
+/* Fija arriba en todas las pantallas: el panel del menú se abre justo debajo */
+.cabecera { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--linea); background: #FFFFFF; }
+.cabecera .contenedor { display: flex; align-items: center; flex-wrap: nowrap; gap: 12px; height: 78px; padding-top: 0; padding-bottom: 0; }
+.logo { margin-right: auto; }
+.logo img { height: 46px; }
+
+/* Teléfono con contorno y botón "Menú" relleno, misma altura */
+.cabecera-tel, .menu-boton {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px;
+  border: 1.5px solid var(--azul-noche); font: inherit; font-weight: 600; text-decoration: none; white-space: nowrap;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out;
 }
-.logo img { height: 58px; width: auto; }
-.menu { order: 2; margin-left: auto; display: flex; flex-wrap: wrap; gap: 4px; font-size: 0.9375rem; }
-.cabecera-tel {
-  order: 3; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px;
-  border: 1px solid var(--azul-noche); background: var(--azul-noche); color: #FFFFFF;
-  font-weight: 600; text-decoration: none; white-space: nowrap;
+.cabecera-tel { order: 0; margin-left: 0; background: transparent; color: var(--azul-noche); }
+.cabecera-tel:hover { background: var(--azul-noche); border-color: var(--azul-noche); color: #FFFFFF; }
+.menu-boton { background: var(--azul-noche); color: #FFFFFF; cursor: pointer; }
+.menu-boton:hover { background: var(--azul-acero); border-color: var(--azul-acero); }
+.menu-boton:focus-visible { outline: 2px solid var(--azul-acero); outline-offset: 3px; }
+.tel-corto { display: none; }
+
+/* Panel del menú: se despliega bajo la cabecera, sobre azul noche */
+.menu[popover] { display: none; }
+.menu[popover]:popover-open {
+  position: fixed; inset: 78px 0 auto 0; width: 100%; height: auto; margin: 0; border: 0; overflow: visible;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 48px;
+  padding: 24px max(24px, calc((100vw - var(--ancho)) / 2 + 24px)) 40px;
+  background: var(--azul-noche); box-shadow: 0 16px 32px rgba(11, 30, 46, 0.25);
+  animation: menu-abrir 0.25s ease-out both;
 }
-.cabecera-tel:hover { background: var(--azul-acero); border-color: var(--azul-acero); color: #FFFFFF; }
-.menu a { color: var(--texto); text-decoration: none; padding: 10px 14px; border-bottom: 2px solid transparent; }
-.menu a:hover { border-bottom-color: var(--linea-oscura); }
-.menu a[aria-current="page"] { border-bottom-color: var(--azul-noche); }
+.menu[popover]:popover-open a {
+  padding: 18px 0; font-size: 1.5rem; font-weight: 500; color: #FFFFFF; text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14); transition: color 0.2s ease-out;
+}
+.menu[popover]:popover-open a:hover { color: var(--azul-claro); }
+.menu[popover]:popover-open a[aria-current="page"] { color: var(--azul-claro); }
+.menu a:focus-visible { outline-color: #FFFFFF; }
+.menu[popover]::backdrop { background: rgba(11, 30, 46, 0.35); }
+@keyframes menu-abrir { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 640px) {
+  .cabecera .contenedor { gap: 8px; height: 68px; }
+  .logo img { height: 40px; }
+  .cabecera-tel, .menu-boton { padding: 0 14px; }
+  .tel-largo { display: none; }
+  .tel-corto { display: inline; }
+  .menu[popover]:popover-open { inset: 68px 0 auto 0; grid-template-columns: 1fr; padding: 8px 16px 24px; }
+  .menu[popover]:popover-open a { padding: 16px 0; font-size: 1.25rem; }
+}
 
 /* Portada */
 .portada { background: var(--azul-noche); border-bottom: 4px solid var(--azul-claro); }
@@ -281,12 +312,6 @@ p { margin: 0; }
   h1 { font-size: 1.75rem; }
   h2 { font-size: 1.375rem; }
 
-  .cabecera .contenedor { gap: 8px; padding-top: 14px; padding-bottom: 10px; }
-  .logo img { height: 48px; }
-  .menu { order: 3; width: 100%; gap: 0; margin-left: -10px; }
-  .menu a { padding: 10px; }
-  .cabecera-tel { order: 2; margin-left: auto; }
-
   .portada img { height: 260px; }
   .foto img, .contacto-foto .foto img { height: 200px; }
   /* Cabecera partida en móvil: foto arriba, texto debajo */
@@ -315,13 +340,11 @@ p { margin: 0; }
 html { scroll-behavior: smooth; }
 
 /* Transiciones suaves en enlaces y botones */
-.menu a { transition: border-color 0.2s ease, color 0.2s ease; }
-.boton, .cabecera-tel { transition: background-color 0.2s ease, color 0.2s ease; }
+.boton { transition: background-color 0.2s ease, color 0.2s ease; }
 
 /* Cabecera fija en pantallas grandes, con sombra al bajar */
+html { scroll-padding-top: 90px; }
 @media (min-width: 641px) {
-  .cabecera { position: sticky; top: 0; z-index: 20; }
-  html { scroll-padding-top: 110px; }
   @supports (animation-timeline: scroll()) {
     .cabecera { animation: cabecera-sombra linear both; animation-timeline: scroll(); animation-range: 0 140px; }
   }
@@ -375,3 +398,4 @@ html { scroll-behavior: smooth; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+

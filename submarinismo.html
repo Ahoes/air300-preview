@@ -15,8 +15,8 @@
 <header class="cabecera">
   <div class="contenedor">
     <a class="logo" href="index.html"><img src="img/logo-nuevo.jpg" alt="AIR300, inicio"></a>
-    <a class="cabecera-tel" href="tel:+34977554050"><span class="oculto">Teléfono: </span>977 55 40 50</a>
-    <nav class="menu" aria-label="Principal">
+    <!-- En móvil el menú se abre con el botón "Menú" (atributo popover: sin JavaScript) -->
+    <nav class="menu" id="menu" aria-label="Principal" popover>
       <a href="index.html">Inicio</a>
       <a href="industria.html">Industria</a>
       <a href="submarinismo.html" aria-current="page">Submarinismo</a>
@@ -24,6 +24,8 @@
       <a href="acreditaciones.html">Acreditaciones</a>
       <a href="contacto.html">Contacto</a>
     </nav>
+    <a class="cabecera-tel" href="tel:+34977554050"><span class="oculto">Teléfono: </span><span class="tel-largo">977 55 40 50</span><span class="tel-corto" aria-hidden="true">Llamar</span></a>
+    <button class="menu-boton" type="button" popovertarget="menu" aria-controls="menu">Menú</button>
   </div>
 </header>
 
