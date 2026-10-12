@@ -89,12 +89,12 @@ p { margin: 0; }
 .menu[popover]:popover-open {
   position: fixed; inset: 78px 0 auto 0; width: 100%; height: auto; margin: 0; border: 0; overflow: visible;
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 48px;
-  padding: 24px max(24px, calc((100vw - var(--ancho)) / 2 + 24px)) 40px;
+  padding: 16px max(24px, calc((100vw - var(--ancho)) / 2 + 24px)) 32px;
   background: var(--azul-noche); box-shadow: 0 16px 32px rgba(11, 30, 46, 0.25);
   animation: menu-abrir 0.25s ease-out both;
 }
 .menu[popover]:popover-open a {
-  padding: 18px 0; font-size: 1.5rem; font-weight: 500; color: #FFFFFF; text-decoration: none;
+  padding: 14px 0; font-size: 1.125rem; font-weight: 500; color: #FFFFFF; text-decoration: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.14); transition: color 0.2s ease-out;
 }
 .menu[popover]:popover-open a:hover { color: var(--azul-claro); }
@@ -110,7 +110,7 @@ p { margin: 0; }
   .tel-largo { display: none; }
   .tel-corto { display: inline; }
   .menu[popover]:popover-open { inset: 68px 0 auto 0; grid-template-columns: 1fr; padding: 8px 16px 24px; }
-  .menu[popover]:popover-open a { padding: 16px 0; font-size: 1.25rem; }
+  .menu[popover]:popover-open a { padding: 14px 0; font-size: 1.125rem; }
 }
 
 /* Portada */
