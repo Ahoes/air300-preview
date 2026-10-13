@@ -399,3 +399,35 @@ html { scroll-padding-top: 90px; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 
+
+/* ===== Prueba: retoques de la revisión de diseño ===== */
+/* Tipografía: sin palabras sueltas al final de párrafos y titulares; cifras de ancho fijo en datos y teléfonos */
+p, li, dd { text-wrap: pretty; }
+h2, h3 { text-wrap: balance; }
+h2 { letter-spacing: -0.01em; }
+.documento-datos dd, .cabecera-tel, a[href^="tel:"] { font-variant-numeric: tabular-nums; }
+a[href^="tel:"] { white-space: nowrap; }
+
+/* Superficies azul noche con un grano muy suave para que no se vean planas */
+.hero-capa, .pagina-hero, .calidad, .consulta {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+/* Portada: degradado con caída irregular (sombra radial abajo a la izquierda) en vez de uno lineal uniforme */
+.hero-capa {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse 70% 90% at 10% 100%, rgba(11, 30, 46, 0.7) 0%, rgba(11, 30, 46, 0) 70%),
+    linear-gradient(90deg, rgba(11, 30, 46, 0.92) 0%, rgba(11, 30, 46, 0.78) 34%, rgba(11, 30, 46, 0.3) 68%, rgba(11, 30, 46, 0.06) 100%);
+}
+@media (max-width: 640px) { .hero-capa { background-color: var(--azul-noche); } }
+
+/* Respiración óptica: un poco más de aire abajo que arriba */
+.inicio-servicios { padding-bottom: 104px; }
+.calidad .contenedor { padding-top: 64px; padding-bottom: 72px; }
+
+/* Botones: al pulsar bajan 1 px, como un botón físico */
+.boton, .cabecera-tel, .menu-boton { transition: background-color 0.2s ease-out, color 0.2s ease-out, transform 0.1s ease-out; }
+.boton:active, .cabecera-tel:active, .menu-boton:active { transform: translateY(1px); }
+
+/* Página 404 */
+.error-404 p { max-width: 560px; }
