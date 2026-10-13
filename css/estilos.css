@@ -186,10 +186,10 @@ p { margin: 0; }
 /* Cabecera partida: texto sobre azul noche alineado con el contenido, foto de la mitad hasta el borde derecho */
 .pagina-hero {
   display: grid; margin-bottom: 40px; background: var(--azul-noche);
-  grid-template-columns: minmax(24px, 1fr) minmax(0, calc(var(--ancho) / 2 - 24px)) minmax(0, calc(var(--ancho) / 2 - 24px)) minmax(24px, 1fr);
+  grid-template-columns: minmax(24px, 1fr) minmax(0, calc(var(--ancho) * 0.58 - 24px)) minmax(0, calc(var(--ancho) * 0.42 - 24px)) minmax(24px, 1fr);
 }
 .pagina-hero-texto { grid-column: 2; display: flex; flex-direction: column; justify-content: flex-end; padding: 72px 48px 64px 0; }
-.pagina-hero-foto { grid-column: 3 / 5; position: relative; min-height: clamp(380px, 48vh, 480px); }
+.pagina-hero-foto { grid-column: 3 / 5; position: relative; min-height: clamp(320px, 42vh, 400px); }
 .pagina-hero-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
 /* Fotos que se alternan (Industria y Submarinismo): una encima de otra; la de arriba aparece y desaparece con un fundido */
@@ -247,13 +247,13 @@ p { margin: 0; }
 /* Imagen a todo el ancho con el texto encima; imagen y capa ocupan la misma celda de la rejilla */
 .hero { display: grid; background: var(--azul-noche); overflow: hidden; }
 .hero > * { grid-area: 1 / 1; }
-.hero-imagen img { width: 100%; height: 100%; min-height: clamp(520px, 74vh, 700px); object-fit: cover; }
+.hero-imagen img { width: 100%; height: clamp(420px, 62vh, 560px); object-fit: cover; }
 .hero-imagen::after { z-index: 2; }
 .hero-capa {
   z-index: 1; display: flex; align-items: flex-end;
   background: linear-gradient(90deg, rgba(11, 30, 46, 0.95) 0%, rgba(11, 30, 46, 0.86) 36%, rgba(11, 30, 46, 0.42) 66%, rgba(11, 30, 46, 0.1) 100%);
 }
-.hero-texto { width: 100%; display: flex; flex-direction: column; gap: 20px; padding-top: 96px; padding-bottom: 72px; }
+.hero-texto { width: 100%; display: flex; flex-direction: column; gap: 20px; padding-top: 80px; padding-bottom: 64px; }
 .hero h1 {
   max-width: 660px; color: #FFFFFF; text-wrap: balance;
   font-size: clamp(2.25rem, 1.3rem + 3.2vw, 3.75rem); line-height: 1.08; letter-spacing: -0.015em;
@@ -268,7 +268,7 @@ p { margin: 0; }
 }
 .franja-sector { position: relative; display: grid; overflow: hidden; }
 .franja-sector > * { grid-area: 1 / 1; }
-.franja-sector-foto img { width: 100%; height: clamp(380px, 46vw, 600px); object-fit: cover; }
+.franja-sector-foto img { width: 100%; height: clamp(320px, 30vw, 440px); object-fit: cover; }
 .franja-sector-texto {
   z-index: 1; align-self: end; display: flex; flex-direction: column; gap: 8px; padding: 112px 40px 36px;
   background: linear-gradient(to top, rgba(11, 30, 46, 0.94) 0%, rgba(11, 30, 46, 0.72) 55%, rgba(11, 30, 46, 0) 100%);
