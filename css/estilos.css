@@ -82,6 +82,18 @@ p { margin: 0; }
 .menu-boton { background: var(--azul-noche); color: #FFFFFF; cursor: pointer; }
 .menu-boton:hover { background: var(--azul-acero); border-color: var(--azul-acero); }
 .menu-boton:focus-visible { outline: 2px solid var(--azul-acero); outline-offset: 3px; }
+/* Tres rayas junto a "Menú"; con el menú abierto se convierten en una X */
+.menu-boton { gap: 10px; }
+.menu-icono, .menu-icono::before, .menu-icono::after {
+  display: block; width: 18px; height: 2px; background: currentColor; transition: transform 0.2s ease-out, background-color 0.2s ease-out;
+}
+.menu-icono { position: relative; }
+.menu-icono::before, .menu-icono::after { content: ""; position: absolute; left: 0; }
+.menu-icono::before { top: -6px; }
+.menu-icono::after { top: 6px; }
+.menu:popover-open ~ .menu-boton .menu-icono { background: transparent; }
+.menu:popover-open ~ .menu-boton .menu-icono::before { transform: translateY(6px) rotate(45deg); }
+.menu:popover-open ~ .menu-boton .menu-icono::after { transform: translateY(-6px) rotate(-45deg); }
 .tel-corto { display: none; }
 
 /* Panel del menú: se despliega bajo la cabecera, sobre azul noche */
