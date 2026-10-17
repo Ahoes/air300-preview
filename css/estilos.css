@@ -6,6 +6,8 @@
 @font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 600; font-display: swap; src: url("../fonts/ibm-plex-sans-600.woff2") format("woff2"); }
 
 :root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);       /* entradas y respuestas: arranca rápido */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);   /* cosas que se transforman en pantalla */
   --azul-noche: #0B1E2E;
   --azul-acero: #1F5A80;
   --texto: #1A1F24;
@@ -85,7 +87,7 @@ p { margin: 0; }
 /* Tres rayas junto a "Menú"; con el menú abierto se convierten en una X */
 .menu-boton { gap: 10px; }
 .menu-icono, .menu-icono::before, .menu-icono::after {
-  display: block; width: 18px; height: 2px; background: currentColor; transition: transform 0.2s ease-out, background-color 0.2s ease-out;
+  display: block; width: 18px; height: 2px; background: currentColor; transition: transform 0.24s var(--ease-in-out), background-color 0.12s ease;
 }
 .menu-icono { position: relative; }
 .menu-icono::before, .menu-icono::after { content: ""; position: absolute; left: 0; }
@@ -97,23 +99,31 @@ p { margin: 0; }
 .tel-corto { display: none; }
 
 /* Panel del menú: se despliega bajo la cabecera, sobre azul noche */
-.menu[popover] { display: none; }
-.menu[popover]:popover-open {
-  position: fixed; inset: 78px 0 auto 0; width: 100%; height: auto; margin: 0; border: 0; overflow: visible;
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 48px;
+/* Abre en 220 ms y cierra en 150 ms (cerrar siempre más rápido que abrir); con transiciones, no con fotogramas fijos,
+   para que un doble clic rápido no haga saltar el panel */
+.menu[popover] {
+  display: none; position: fixed; inset: 78px 0 auto 0; width: 100%; height: auto; margin: 0; border: 0; overflow: visible;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 48px;
   padding: 16px max(24px, calc((100vw - var(--ancho)) / 2 + 24px)) 32px;
   background: var(--azul-noche); box-shadow: 0 16px 32px rgba(11, 30, 46, 0.25);
-  animation: menu-abrir 0.25s ease-out both;
+  opacity: 0; transform: translateY(-8px);
+  transition: opacity 0.15s var(--ease-out), transform 0.15s var(--ease-out), display 0.15s allow-discrete, overlay 0.15s allow-discrete;
 }
-.menu[popover]:popover-open a {
+.menu[popover]:popover-open { display: grid; opacity: 1; transform: none; transition-duration: 0.22s; }
+@starting-style { .menu[popover]:popover-open { opacity: 0; transform: translateY(-8px); } }
+.menu[popover] a {
   padding: 12px 0; font-size: 1rem; font-weight: 500; color: #FFFFFF; text-decoration: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.14); transition: color 0.2s ease-out;
 }
-.menu[popover]:popover-open a:hover { color: var(--azul-claro); }
-.menu[popover]:popover-open a[aria-current="page"] { color: var(--azul-claro); }
+.menu[popover] a:hover { color: var(--azul-claro); }
+.menu[popover] a[aria-current="page"] { color: var(--azul-claro); }
 .menu a:focus-visible { outline-color: #FFFFFF; }
-.menu[popover]::backdrop { background: rgba(11, 30, 46, 0.35); }
-@keyframes menu-abrir { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+.menu[popover]::backdrop {
+  background-color: rgba(11, 30, 46, 0);
+  transition: background-color 0.2s var(--ease-out), display 0.2s allow-discrete, overlay 0.2s allow-discrete;
+}
+.menu[popover]:popover-open::backdrop { background-color: rgba(11, 30, 46, 0.35); }
+@starting-style { .menu[popover]:popover-open::backdrop { background-color: rgba(11, 30, 46, 0); } }
 
 @media (max-width: 640px) {
   .cabecera .contenedor { gap: 8px; height: 68px; }
@@ -121,8 +131,8 @@ p { margin: 0; }
   .cabecera-tel, .menu-boton { padding: 0 14px; }
   .tel-largo { display: none; }
   .tel-corto { display: inline; }
-  .menu[popover]:popover-open { inset: 68px 0 auto 0; grid-template-columns: 1fr; padding: 8px 16px 24px; }
-  .menu[popover]:popover-open a { padding: 14px 0; font-size: 1.125rem; }
+  .menu[popover] { inset: 68px 0 auto 0; grid-template-columns: 1fr; padding: 8px 16px 24px; }
+  .menu[popover] a { padding: 14px 0; font-size: 1.125rem; }
 }
 
 /* Portada */
@@ -365,24 +375,26 @@ html { scroll-padding-top: 90px; }
 
 /* Entrada al cargar: la imagen principal se acerca y el texto aparece */
 .portada { overflow: hidden; }
-.portada img { animation: portada-entrada 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-@keyframes portada-entrada { from { transform: scale(1.08); opacity: 0.4; } to { transform: none; opacity: 1; } }
+.portada img { animation: portada-entrada 0.9s var(--ease-out) both; }
+@keyframes portada-entrada { from { transform: scale(1.03); opacity: 0.6; } to { transform: none; opacity: 1; } }
 
-.hero-imagen img { animation: portada-entrada 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-.hero-texto > * { animation: subir 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-.hero-texto > :nth-child(2) { animation-delay: 0.12s; }
-.hero-texto > :nth-child(3) { animation-delay: 0.24s; }
-.franja-sector-foto img { transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.franja-sector:has(a):hover .franja-sector-foto img { transform: scale(1.04); }
+.hero-imagen img { animation: portada-entrada 0.9s var(--ease-out) both; }
+.hero-texto > * { animation: subir 0.5s var(--ease-out) both; }
+.hero-texto > :nth-child(2) { animation-delay: 0.06s; }
+.hero-texto > :nth-child(3) { animation-delay: 0.12s; }
+.franja-sector-foto img { transition: transform 0.6s var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .franja-sector:has(a):hover .franja-sector-foto img { transform: scale(1.04); }
+}
 
 .pagina-hero-texto > *, .intro > h1, .intro > p {
-  animation: subir 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: subir 0.5s var(--ease-out) both;
 }
-.pagina-hero-texto > :nth-child(2), .intro > h1 { animation-delay: 0.12s; }
-.pagina-hero-texto > :nth-child(3), .intro > p { animation-delay: 0.24s; }
+.pagina-hero-texto > :nth-child(2), .intro > h1 { animation-delay: 0.06s; }
+.pagina-hero-texto > :nth-child(3), .intro > p { animation-delay: 0.12s; }
 .pagina-hero-foto { overflow: hidden; }
-.pagina-hero-foto img { animation: portada-entrada 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-@keyframes subir { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.pagina-hero-foto img { animation: portada-entrada 0.9s var(--ease-out) both; }
+@keyframes subir { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
 /* Alternancia de las fotos de Industria y Submarinismo: ciclo de 14 s, fundido de algo más de 1 s y acercamiento lento */
 .alterna img { animation: acercar 14s ease-in-out infinite alternate; }
@@ -398,17 +410,20 @@ html { scroll-padding-top: 90px; }
     animation-range: entry 0% entry 45%;
   }
 }
-@keyframes aparecer { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@keyframes aparecer { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 
 /* Fotos de sectores: ligero acercamiento al pasar el ratón */
 .sector .provisional { overflow: hidden; }
-.sector img { transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.sector:hover img { transform: scale(1.05); }
+.sector img { transition: transform 0.6s var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .sector:hover img { transform: scale(1.05); }
+}
 
 /* Respetar la preferencia de reducir movimiento */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+  *, *::before, *::after { animation: none !important; transition-property: color, background-color, border-color, opacity !important; }
+  .boton:active, .cabecera-tel:active, .menu-boton:active { transform: none; }
 }
 
 
@@ -437,9 +452,10 @@ a[href^="tel:"] { white-space: nowrap; }
 .inicio-servicios { padding-bottom: 104px; }
 .calidad .contenedor { padding-top: 64px; padding-bottom: 72px; }
 
-/* Botones: al pulsar bajan 1 px, como un botón físico */
-.boton, .cabecera-tel, .menu-boton { transition: background-color 0.2s ease-out, color 0.2s ease-out, transform 0.1s ease-out; }
-.boton:active, .cabecera-tel:active, .menu-boton:active { transform: translateY(1px); }
+/* Botones: al pulsar se encogen un poco, así se nota que la web ha recibido el toque */
+.boton, .cabecera-tel, .menu-boton { transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.16s var(--ease-out); }
+.boton:active, .cabecera-tel:active, .menu-boton:active { transform: scale(0.97); }
+a, button { -webkit-tap-highlight-color: transparent; }
 
 /* Página 404 */
 .error-404 p { max-width: 560px; }
